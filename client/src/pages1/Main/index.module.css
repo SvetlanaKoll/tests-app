@@ -1,16 +1,62 @@
-.container{
-  background-image: url(../../static/back-main.jpg.jpg);
+.main{
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Raleway', sans-serif;
+ 
+}
+.main__text{
+  
+}
+.slider{
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: relative
+}
+
+.slide1,
+.slide2,
+.slide3 {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100vw;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  font-family: 'Raleway', sans-serif;
-  color: #fff;
+  width: 100vw;
+}
+
+.slide1{
+  background-image: url(../../static/water.jpg);
+}
+.slide2{
+  background-image: url(../../static/sun.jpg);
+} 
+.slide3{
+  background-image: url(../../static/house.jpg);
+} 
+.slider .slick-dots {
+  position: absolute;
+  bottom: 50px !important;
+  width: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex !important;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10;
+}
+
+.slider .slick-dots li button {
+  opacity: 0;
+  z-index: 10;
+}
+
+.slider .slick-dots li {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  transition: .5s;
+  z-index: 10;
 }
 .logo{
   display: flex;
@@ -19,8 +65,11 @@
   justify-content: center;
   align-items: flex-start;
   text-transform: uppercase;
-  margin:8vh 0 22vh;
-  margin-left: 5vw;
+  position: absolute;
+  top:10vh;
+  left: 5vw;
+  z-index: 4;
+  color:rgb(74,79,86);
 }
 .logo__big{
   font-size: 2rem;
@@ -28,15 +77,19 @@
 .title{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-end;
+  align-items: flex-end;
   text-transform: uppercase;
   font-size: 6.5rem;
-  width: 30vw;
-  margin-left: 8vw;
+  position: absolute;
+  top: 30vh;
+  left: 10vw;
+  z-index: 4;
+  color:#fff;
 }
 .title__md{
-  font-size: 2.5rem;
+  font-size: 3.5rem;
+  margin-left: 2vw;
 }
 .title__small{
   font-size: 1.5rem;
@@ -44,13 +97,23 @@
   margin-top: 5vh;
   margin-left: 5vw;
   text-transform: lowercase;
+  width: 30vw;
 }
 .title__btn{
   padding: 10px 45px;
   border: 1.5px solid #fff;
+  font-size: 1rem;
   background-color: transparent;
   color: #fff;
-  align-self: center;
-  margin-top: 15vh;
-
+  outline: none;
+  text-transform: capitalize;
+}
+.title__link{
+ outline: none;
+ text-align: center;
+}
+.title__btn:hover{
+  cursor: pointer;
+  background-color:rgba(255,255,255, 0.5);
+  color: black;
 }
