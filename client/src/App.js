@@ -1,6 +1,6 @@
 import React from 'react'
-import Main from './pages1/Main'
-import About from './pages1/About'
+import Main from './pages/Main'
+import About from './pages/About'
 import Sidebar from './components/Sidebar'
 import './App.css'
 import {
@@ -11,14 +11,15 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Route path='/'>
+        {/* <Route path='/' component={Main}>
           <Main />
-        </Route>
-        <Sidebar />
-        <Route path='/about'>
+        </Route> */}
+        
+        <Route path='/about' component={About}>
           <About />
         </Route>
      </Router>
+     <Sidebar />
     </div>
   );
 }
