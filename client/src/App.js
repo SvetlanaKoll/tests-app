@@ -4,21 +4,18 @@ import About from './pages/About'
 import Sidebar from './components/Sidebar'
 import './App.css'
 import {
-  BrowserRouter as Router, Route
+  BrowserRouter as Router, Switch, Route
 } from 'react-router-dom'
 
 function App() {
   return (
     <div className="App">
       <Router>
-        {/* <Route path='/' component={Main}>
-          <Main />
-        </Route> */}
-        
-        <Route path='/about' component={About}>
-          <About />
-        </Route>
-     </Router>
+        <Switch>
+          <Route exact path='/' component={Main} />
+          <Route exact path='/about' component={About} />
+        </Switch>
+      </Router>
      <Sidebar />
     </div>
   );
