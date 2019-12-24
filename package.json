@@ -2,10 +2,15 @@
   "name": "tests-app",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/SvetlanaKoll/tests-app.git",
+  "repository": "git@github.com:SvetlanaKoll/tests-app.git",
   "author": "Svetlana Kollau <svetlana.kollau@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "react-router-dom": "^5.1.2"
+    "concurrently": "^5.0.2",
+    "yarn": "^1.21.1"
+  },
+  "scripts": {
+    "build": "concurrently \"cd client && yarn && yarn build\" \"cd server && yarn && yarn build\"",
+    "start": "cd server && yarn init:prod"
   }
 }
