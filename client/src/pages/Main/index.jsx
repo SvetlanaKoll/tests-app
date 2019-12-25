@@ -2,10 +2,11 @@ import React from 'react'
 import style from './index.module.css'
 import Fade from 'react-reveal/Fade'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import '../../../node_modules/slick-carousel/slick/slick.css'
 import '../../../node_modules/slick-carousel/slick/slick-theme.css'
 import Slider from "react-slick"
-export default function Main() {
+function Main() {
   const settings = {
     dots: true,
     arrows:false,
@@ -78,3 +79,4 @@ export default function Main() {
     </div>
   )
 }
+export default withRouter(Main)

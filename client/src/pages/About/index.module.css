@@ -1,11 +1,12 @@
 .container{
-  width: 100vw;
-  background-color: rgb(241,241,241);
+  width: 100%;
+  background-color: cadetblue;
   font-family: 'Raleway', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  color: #fff;
 }
 .about{
   display: flex;
@@ -47,7 +48,7 @@
 .gallery__item5,
 .gallery__item6,
 .gallery__item7{
-  background-image: url(../../static/sun.jpg);
+  background-image: url(../../static/sun-min.webp);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -59,34 +60,34 @@
 }
 .gallery__item1{
   grid-area: a;
-  background-image: url(../../static/hands.jpg);
+  background-image: url(../../static/hands-min.webp);
 }
 .gallery__item2{
   grid-area: b;
-  background-image: url(../../static/fire.jpg);
+  background-image: url(../../static/fire-min.webp);
 }
 .gallery__item3{
   grid-area: c;
-  background-image: url(../../static/create.jpg);
+  background-image: url(../../static/create-min.webp);
   color: black;
 }
 .gallery__item4{
   grid-area: d;
-  background-image: url(../../static/hat.jpg);
+  background-image: url(../../static/hat-min.webp);
 }
 
 .gallery__item5{
   grid-area: e;
-  background-image: url(../../static/help.jpg);
+  background-image: url(../../static/help-min.webp);
 }
 .gallery__item6{
   grid-area: f;
-  background-image: url(../../static/sunhands.jpg);
+  background-image: url(../../static/sunhands-min.webp);
   color: black;
 }
 .gallery__item7{
   grid-area: g;
-  background-image: url(../../static/books.jpg);
+  background-image: url(../../static/books-min.webp);
 }
 .markerBtn{
   background: none;

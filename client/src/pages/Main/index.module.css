@@ -25,13 +25,13 @@
 }
 
 .slide1{
-  background-image: url(../../static/water.jpg);
+  background-image: url(../../static/water-min.webp);
 }
 .slide2{
-  background-image: url(../../static/sun.jpg);
+  background-image: url(../../static/sun-min.webp);
 } 
 .slide3{
-  background-image: url(../../static/house.jpg);
+  background-image: url(../../static/house-min.webp);
 } 
 .slider .slick-dots {
   position: absolute;
