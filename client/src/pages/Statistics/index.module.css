@@ -1,9 +1,13 @@
 .container{
   width: 100%;
-  height: 100vh;
+  height: 150vh;
   display: flex;
   background-color: cadetblue;
   font-family: 'Raleway', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 .container__title{
   width: 100%;
@@ -18,4 +22,9 @@
   background-position: center center;
   font-size: 3.5rem;
   color: #fff;
+}
+.chart{
+  width: 70vw;
+  height: 40vh;
+  margin-top: 40px;
 }

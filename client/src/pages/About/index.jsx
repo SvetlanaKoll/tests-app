@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './index.module.css'
 import { withRouter } from 'react-router-dom'
-import Map from '../../components/Map.jsx/Map'
+import Map from '../../components/Map/Map'
 import Flip from 'react-reveal/Flip';
 import Zoom from 'react-reveal/Zoom';
 function About() {
