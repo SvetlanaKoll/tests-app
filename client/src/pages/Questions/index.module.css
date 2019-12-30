@@ -1,14 +1,15 @@
 .container{
   width: 100%;
-  min-height: 100vh;
-  padding-bottom: 50px;
+  height: 150vh;
+  display: flex;
+  background-color: rgba(204, 229, 235,1);
+  font-family: 'Raleway', sans-serif;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  background-color: cadetblue;
-  font-family: 'Raleway', sans-serif;
 }
-.themes{
+.container__question{
   width: 60vw;
   display: grid;
   grid-template-columns: 1fr;

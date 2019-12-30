@@ -14,7 +14,7 @@
 
 .sidebar__btn{
   width: 2vw;
-  height: 2.5vh;
+  height: 4vh;
   margin-left: 1vw;
   display: flex;
   flex-direction: column;
@@ -22,11 +22,12 @@
   justify-content: space-between;
 }
 .line{
-  width: 100%;
-  height: 1px;
-  background-color: #fff;
-  transition: .5s;
-  
+background-image: url(../../static/home.svg);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+height: 4vh ;
+width: 2vw;
 }
 .line:nth-child(3) {
   width: 1.1vw;
@@ -43,17 +44,28 @@
  transition: 0.5s;
  color:#fff;
 }
-.nav__li:hover{
+.nav__li__choose{
+  padding: 1vh 2vw ;
+ font-size: 1.1rem;
+ color:#fff;
+}
+.nav__li__themes{
+ color:#fff;
+  outline: none;
+  transition: 0.5s;
+ }
+ .nav__sub{
+  position: absolute;
+  top: 8vh;
+
+}
+.nav__li:hover,.nav__li__themes:hover{
   cursor: pointer;
   transform:scale(1.1, 1.1);
+  outline: none;
+  color: #fff;
  }
+ 
  .divider{
    color: rgba(255,255,255, 0.5);
  }
-/* .sidebar:hover{
-  width: 100vw;
-  background-color:rgba(117,129,127, 0.6);
-} */
-/* .sidebar:hover > .nav{
-  display: flex;
-} */

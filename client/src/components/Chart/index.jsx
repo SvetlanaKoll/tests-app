@@ -1,7 +1,11 @@
-import React, {Component} from 'react';
-import {Bar, Line, Pie} from 'react-chartjs-2';
+import React, {Component} from 'react'
+import {Bar, Line, Pie} from 'react-chartjs-2'
+import { defaults } from 'react-chartjs-2'
 
+defaults.global.defaultFontFamily = 'Raleway';
+defaults.global.defaultFontColor = '#fff';
 class Chart extends Component{
+
   constructor(props){
     super(props);
     this.state = {
@@ -9,7 +13,7 @@ class Chart extends Component{
         labels: [ 'Are you pregnant?','Ill or not?', 'Test your English', 'Now or later?', 'Are you beloved?', 'Check your type of person'],
         datasets:[
           {
-            label:'Quantity',
+            label:'Quantity of passed tests',
             data:[
               167,
               143,
@@ -26,9 +30,12 @@ class Chart extends Component{
               'rgba(153, 102, 255, 0.6)',
               'rgba(255, 159, 64, 0.6)',
               'rgba(255, 99, 132, 0.6)'
-            ]
+            ],
+            // fontFamily:'Raleway',
+            // fontColor: '#fff'
           }
-        ]
+        ],
+        
       }
       
     }
@@ -48,14 +55,23 @@ class Chart extends Component{
         <Bar
           data={this.state.chartData}
           options={{
+            global:{
+              line: {
+                fontColor: '#F85F73',
+               }
+            },
             title:{
               display:true,
               text:'The most popular tests',
-              fontSize:25
+              fontSize:25,
+              fontFamily:'Raleway',
+              fontColor: '#fff'
             },
             legend:{
-              display:false,
-              position: 'right'
+              display:true,
+              position: 'top',
+              fontFamily:'Raleway',
+              fontColor: '#fff'
             }
           }}
         />

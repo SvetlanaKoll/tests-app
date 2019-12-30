@@ -17,7 +17,7 @@ export default function Map () {
       onViewportChange={viewport => {
         setViewport(viewport)
       }}
-      mapStyle='mapbox://styles/svetlanakoll/ck4ieqc4j059r1co4j9qbfakw'
+      // mapStyle='mapbox://styles/svetlanakoll/ck4ieqc4j059r1co4j9qbfakw'
     >
       <Marker latitude={49.233411} longitude={28.456282}>
         <button className={style.markerBtn}>
