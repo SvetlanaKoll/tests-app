@@ -43,6 +43,7 @@ width: 2vw;
  font-size: 1.1rem;
  transition: 0.5s;
  color:#fff;
+ text-decoration: none;
 }
 .nav__li__choose{
   padding: 1vh 2vw ;
@@ -56,14 +57,15 @@ width: 2vw;
  }
  .nav__sub{
   position: absolute;
-  top: 8vh;
+  top: 10vh;
 
 }
 .nav__li:hover,.nav__li__themes:hover{
   cursor: pointer;
-  transform:scale(1.1, 1.1);
+  /* transform:scale(1.1, 1.1); */
   outline: none;
   color: #fff;
+  text-decoration: none !important;
  }
  
  .divider{
