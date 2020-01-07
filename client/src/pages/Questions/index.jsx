@@ -5,6 +5,7 @@ import style from './index.module.css'
 import QuestionsItem from '../../components/QuestionsItem'
 import sea from '../../static/sea-book.jpg'
 import FirstBlock from '../../components/FirstBlock'
+import Timer from '../../components/Timer'
 function Questions({ history }) {
   const passTest = () => {
     console.log(123)
@@ -25,6 +26,7 @@ function Questions({ history }) {
     <div className={style.container}>
       
       <FirstBlock image={sea} title='Questions' color='rgb(66, 72, 74)'/>
+      <Timer />
     <div className={style.container__question}>
       <QuestionsItem />
       <QuestionsItem />

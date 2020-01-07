@@ -7,6 +7,7 @@ import Statistics from './pages/Statistics'
 import Themes from './pages/Themes'
 import Tests from './pages/Tests'
 import Questions from './pages/Questions'
+import AddTest from './pages/AddTest'
 import './App.css'
 import {
   BrowserRouter as Router, Switch, Route, Redirect
@@ -21,6 +22,7 @@ function App() {
           <Route exact path='/themes' component={Themes} />
           <Route exact path='/statistics' component={Statistics} />
           <Route exact path='/about' component={About} />
+          <Route exact path='/add' component={AddTest} />
           <Route exact path='/tests' component={Tests} />
           <Route exact path='/tests/theme/:themeName' component={Tests} />
           <Route exact path='/tests/theme/' render={() => <Redirect to='/tests' />} />

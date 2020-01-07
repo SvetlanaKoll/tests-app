@@ -39,7 +39,9 @@ export default function Navbar() {
        
        
         <div className={style.divider}>|</div>
+        <Link to='/add'>
         <div className={style.nav__li}>Add test</div>
+        </Link>
         <div className={style.divider}>|</div>
         <Link to='/statistics'>
         <div className={style.nav__li}>Statistics</div>
