@@ -1,3 +1,20 @@
 .answers{
   align-self:flex-start;
 }
+.container{
+  border:2px solid rgba(95,158,160,0.3);
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+.btns{
+  align-self: flex-start;
+}
+.del{
+  padding: 0 6px;
+  background-color: rgb(220,53,69);
+  border: none;
+  color: #fff;
+  border-radius: 0;
+  height: 97%;
+  align-self: center;
+}

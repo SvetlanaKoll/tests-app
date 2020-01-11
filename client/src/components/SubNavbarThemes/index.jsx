@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Fade from 'react-reveal/Fade'
 import style from './index.module.css'
 
-export default function SubNavbarThemes({ closeMenu }) {
+export default function SubNavbarThemes() {
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <ul 
-      className={style.container}
-      onMouseLeave={closeMenu}
+    <div
+      onClick={() => setIsOpen(true)}
     >
-       <Fade top >
-      <li className={style.container__li}>Pregnancy</li>
-      <li className={style.container__li}>Psycho</li>
-      <li className={style.container__li}>English</li>
-      </Fade>
-    </ul>
+      {isOpen
+        ? (
+          <ul 
+            className={style.container}
+          >
+            <Fade top >
+            <li className={style.container__li}>All Themes</li>
+            <li className={style.container__li}>Psycho</li>
+            <li className={style.container__li}>English</li>
+            </Fade>
+          </ul>
+        )
+        : null
+      } 
+    </div>
   )
 }
