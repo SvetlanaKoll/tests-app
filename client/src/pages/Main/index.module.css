@@ -4,9 +4,6 @@
   font-family: 'Raleway', sans-serif;
  
 }
-.main__text{
-  
-}
 .slider{
   overflow: hidden;
   height: 100%;
@@ -117,4 +114,23 @@
   cursor: pointer;
   background-color:rgba(255,255,255, 0.5);
   color: black;
+}
+@media screen and (max-width: 890px) {
+  .title{
+    font-size: 4.5rem;
+  }
+  .title__md{
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 530px) {
+  .title{
+    font-size: 3rem;
+  }
+  .title__md{
+    font-size:1.5rem;
+  }
+  .title__small{
+    font-size: 0.8rem;
+  }
 }

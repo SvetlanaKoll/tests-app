@@ -31,3 +31,13 @@
   grid-template-rows: auto;
   grid-row-gap: 1rem;
 }
+@media screen and (max-width: 890px) {
+  .themes{
+   width: 70vw;
+  }
+}
+@media screen and (max-width: 530px) {
+  .themes{
+   width: 80vw;
+  }
+}
