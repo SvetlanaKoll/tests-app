@@ -4,6 +4,11 @@ import { withRouter } from 'react-router-dom'
 import Map from '../../components/Map/Map'
 import Flip from 'react-reveal/Flip';
 import Zoom from 'react-reveal/Zoom';
+import fb from '../../static/fb.svg'
+import tw from '../../static/tw.svg'
+import insta from '../../static/insta.svg'
+import gm from '../../static/gm.svg'
+import phone from '../../static/phone.svg'
 function About() {
   return (
     <div className={style.container}>
@@ -44,25 +49,25 @@ function About() {
        <div className={style.container__socials}>
         <div className={style.socials}>
           <div className={style.socials__item}>
-            <div className={style.icon__fb}></div>
+            <div style={{ backgroundImage: `url(${fb})`}} className={style.icon}></div>
             <div className={style.icon__name}>facebook.com/perception</div>
           </div>
           <div className={style.socials__item}>
-            <div className={style.icon__insta}></div>
+            <div style={{ backgroundImage: `url(${insta})`}} className={style.icon}></div>
             <div className={style.icon__name}>instagram.com/perception</div>
           </div>
           <div className={style.socials__item}>
-            <div className={style.icon__tw}></div>
+            <div style={{ backgroundImage: `url(${tw})`}} className={style.icon}></div>
             <div className={style.icon__name}>twitter.com/perception</div>
           </div>
         </div>
         <div className={style.socials}>
           <div className={style.socials__item}>
-            <div className={style.icon__gm}></div>
+            <div style={{ backgroundImage: `url(${gm})`}} className={style.icon}></div>
             <div className={style.icon__name}>perception@gmail.com</div>
           </div>
           <div className={style.socials__item}>
-            <div className={style.icon__phone}></div>
+            <div style={{ backgroundImage: `url(${phone})`}} className={style.icon}></div>
             <div className={style.icon__name}>+38 066 512 3773</div>
           </div>
         </div>
