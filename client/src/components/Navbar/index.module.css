@@ -65,6 +65,8 @@
        left: 0;
        transition:0.5s;
        overflow: hidden;
+       background-color: rgba(15, 71, 77, 0.7);
+       z-index: 2;
     }
     .sidebar:hover{
         width: auto;

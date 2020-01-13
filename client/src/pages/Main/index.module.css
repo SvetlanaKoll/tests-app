@@ -81,7 +81,7 @@
   position: absolute;
   top: 30vh;
   left: 10vw;
-  z-index: 4;
+  z-index: 1;
   color:#fff;
 }
 .title__md{

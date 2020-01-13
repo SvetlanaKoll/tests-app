@@ -72,12 +72,15 @@ function About() {
           </div>
         </div>
       </div>
+      
         <Flip left >
             <div className={style.about__title}>Where we are?</div>
         </Flip>
+     
        <div className={style.about__desc}>Lorem ipsum dolor sit amet consectetur adipisicing elit.
         Libero, atque placeat officiis cum, id dolorum neque distinctio
         quam perspiciatis quo possimus nemo obcaecati earum nisi, dolor provident facere mollitia impedit!</div>
+       
        <Map />
     </div>
   )

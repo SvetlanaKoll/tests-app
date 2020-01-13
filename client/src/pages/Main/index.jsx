@@ -19,12 +19,30 @@ function Main() {
     cssEase: "linear",
     pauseOnHover: true,
     swipeToSlide: true,
+    responsive: [
+      {
+        breakpoint: 890,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 530,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1
+        }
+      }
+    ],
     appendDots: dots => (
       <div
         style={{
           position: 'absolute',
           bottom: '1vh',
-          width: '15vw',
+          width: 'auto',
           left: '50%',
           transform: 'translateX(-50%)',
           display: 'flex',
@@ -39,8 +57,8 @@ function Main() {
     customPaging: i => (
       <div
         style={{
-          width: '10px',
-          height: '10px',
+          width: '0.6rem',
+          height: '0.6rem',
           borderRadius: '50%',
           backgroundColor: 'rgba(255, 255, 255, 0.3)',
           transition: '.5s'
