@@ -24,6 +24,13 @@ export default function QuestionAdd(props) {
   </div>
     </div>
         <button className="btn btn-md btn-info m-0 px-3" type="button">+ option</button>
+        <button 
+          className="btn btn-md btn-danger m-0 px-3" 
+          type="button"
+          onClick={() => props.setQuestions( props.questions.filter( question => question.id !== props.id))}
+        >
+          delete
+        </button>
 </div>
     
     </div>

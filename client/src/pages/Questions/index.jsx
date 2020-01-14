@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
-import Flip from 'react-reveal/Flip'
 import style from './index.module.css'
 import QuestionsItem from '../../components/QuestionsItem'
 import sea from '../../static/sea-book.jpg'
 import FirstBlock from '../../components/FirstBlock'
 import Timer from '../../components/Timer'
 function Questions({ history }) {
-  const passTest = () => {
-    console.log(123)
-  }
+  
+  // const passTest = () => {
+  //   console.log(123)
+  // }
 
   // useEffect(() => {
   //   if (!window.confirm('Are you ready to pass the test?')) {
@@ -22,16 +22,15 @@ function Questions({ history }) {
   //   }
   // }, [])
 
+  
+
   return (
     <div className={style.container}>
       
       <FirstBlock image={sea} title='Questions' color='rgb(66, 72, 74)'/>
       <Timer />
     <div className={style.container__question}>
-      <QuestionsItem />
-      <QuestionsItem />
-      <QuestionsItem />
-      <QuestionsItem />
+     <QuestionsItem />
     </div>
   </div>
   )

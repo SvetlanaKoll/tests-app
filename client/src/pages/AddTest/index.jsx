@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState }  from 'react'
 import sea from '../../static/sea-book.jpg'
 import style from './index.module.css'
 import FirstBlock from '../../components/FirstBlock'
 import QuestionAdd from '../../components/QuestionAdd'
 import { withRouter } from 'react-router-dom'
+import uuid from 'uuid/v1'
+
  function AddTest() {
+  const [questions, setQuestions] = useState([])
+  // useEffect(() => {
+  //   setQuestions([{}, {}, {}])
+  // }, [])
+
+  useEffect(() => {
+    console.log(questions)
+  }, [questions])
   return (
     <div className={style.container}>
       
@@ -33,12 +43,18 @@ import { withRouter } from 'react-router-dom'
             {/* <button class="btn btn-md btn-primary m-0 px-3" type="button">Add name</button> */}
           </div>
         </div>
-
-        <QuestionAdd />
+        {questions.map( ({ id }) => <QuestionAdd id={id} key={id} questions={questions} setQuestions={setQuestions} />)}
+        
        
 
         <div className={style.btns}>
-        <button class="btn btn-md btn-primary m-0 px-3" type="button">+ question</button>
+        <button 
+          class="btn btn-md btn-primary m-0 px-3" 
+          type="button"
+          onClick={() => setQuestions([...questions, { id: uuid() }])}
+        >
+          + question
+        </button>
         <button class="btn btn-md btn-secondary m-0 px-3" type="button">Add test</button>
         </div>
 
