@@ -42,6 +42,8 @@ bower_components
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
+build
+
 # Dependency directories
 node_modules/
 jspm_packages/
@@ -108,5 +110,6 @@ bower_componets
 psd
 thumb
 sketch
+containers/
 
 # End of https://www.gitignore.io/api/node,react
