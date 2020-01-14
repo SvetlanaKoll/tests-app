@@ -25,3 +25,16 @@
   outline: none;
   background-color: rgba(15,71,77,0.6);
 }
+@media screen and (max-width: 890px) {
+  .box__title{
+    font-size: 1.5rem;
+  }
+  .box__q{
+    font-size: 0.8rem;
+  }
+}
+@media screen and (max-width: 530px) {
+  .box__title{
+    font-size: 1.2rem;
+  }
+}

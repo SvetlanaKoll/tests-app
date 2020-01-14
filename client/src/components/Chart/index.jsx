@@ -63,7 +63,7 @@ class Chart extends Component{
             title:{
               display:true,
               text:'The most popular tests',
-              fontSize:25,
+              fontSize:24,
               fontFamily:'Raleway',
               fontColor: '#fff'
             },
