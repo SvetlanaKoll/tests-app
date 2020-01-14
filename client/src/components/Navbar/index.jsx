@@ -4,6 +4,8 @@ import style from './index.module.css'
 import { Link } from 'react-router-dom'
 import SubNavbarThemes from '../SubNavbarThemes'
 import { useAuth0 } from '../../react-auth0-spa'
+import Profile from '../Profile'
+import history from "../../utils/history";
 
 export default function Navbar() {
   const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0()
@@ -68,6 +70,19 @@ export default function Navbar() {
           )
           
         }
+       <Link to='/profile'>
+        {isAuthenticated
+                  ? (
+                   
+                    <div className={style.nav__li}><Profile /></div>
+                 
+                  )
+                  : (
+                    null
+                  )
+                  
+        }
+   </Link>
        
         </Fade>
       </div>
