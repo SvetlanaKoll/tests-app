@@ -5,8 +5,9 @@ import QuestionsItem from '../../components/QuestionsItem'
 import sea from '../../static/sea-book.jpg'
 import FirstBlock from '../../components/FirstBlock'
 import Timer from '../../components/Timer'
-function Questions({ history }) {
-  
+import Results from '../Results'
+
+function Questions ({ history }) {
   // const passTest = () => {
   //   console.log(123)
   // }
@@ -22,17 +23,22 @@ function Questions({ history }) {
   //   }
   // }, [])
 
-  
-
   return (
     <div className={style.container}>
-      
+
       <FirstBlock image={sea} title='Questions' color='rgb(66, 72, 74)'/>
       <Timer />
-    <div className={style.container__question}>
-     <QuestionsItem />
+      <div className={style.container__question}>
+        <QuestionsItem />
+      </div>
+      <button
+        className='btn btn-md btn-primary m-0 px-3'
+        type='button'
+        
+      >
+            Finish
+      </button>
     </div>
-  </div>
   )
 }
 export default withRouter(Questions)

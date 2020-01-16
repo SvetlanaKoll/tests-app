@@ -8,9 +8,16 @@ import uuid from 'uuid/v1'
 
 function AddTest () {
   const [questions, setQuestions] = useState([])
+  const [selectedTheme, setSelectedTheme] = useState(null)
+  const [themes, setThemes] = useState([])
+  const [testTitle, setTestTitle] = useState('')
   // useEffect(() => {
   //   setQuestions([{}, {}, {}])
   // }, [])
+
+  useEffect(() => {
+    setThemes([...themes, { id: uuid(), title: 'English' }, { id: uuid(), title: 'Physics' }])
+  }, [])
 
   useEffect(() => {
     console.log(questions)
@@ -25,20 +32,41 @@ function AddTest () {
           <input type='text' className='form-control' placeholder='Your new theme' aria-label="Recipient's username with two button addons"
             aria-describedby='MaterialButton-addon4'></input>
           <div className='input-group-append' id='MaterialButton-addon4'>
-            <button className='btn btn-md btn-primary m-0 px-3' type='button'>Add theme</button>
+            <button
+              className='btn btn-md btn-primary m-0 px-3'
+              type='button'
+            >
+              Add theme
+            </button>
           </div>
         </div>
 
-        <select className='browser-default custom-select'>
-          <option selected>Choose theme</option>
-          <option value='1'>One</option>
-          <option value='2'>Two</option>
-          <option value='3'>Three</option>
+        <select
+          className='browser-default custom-select'
+          onChange={e => setSelectedTheme(e.target.value)}
+        >
+          <option defaultSelected value='0'>Choose your theme</option>
+          {themes.map(theme => (
+            <option
+              value={theme.id}
+              key={theme.id}
+            >
+              {theme.title}
+            </option>
+          ))}
         </select>
 
         <div className='md-form input-group'>
-          <input type='text' className='form-control' placeholder='Your test name' aria-label="Recipient's username with two button addons"
-            aria-describedby='MaterialButton-addon4'></input>
+          <input type='text'
+            className='form-control'
+            placeholder='Your test name'
+            aria-label="Recipient's username with two button addons"
+            aria-describedby='MaterialButton-addon4'
+            value={testTitle}
+            onChange={e => setTestTitle(e.target.value)}
+          >
+
+          </input>
           <div className='input-group-append' id='MaterialButton-addon4'>
             {/* <button class="btn btn-md btn-primary m-0 px-3" type="button">Add name</button> */}
           </div>
