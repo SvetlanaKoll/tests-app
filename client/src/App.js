@@ -29,7 +29,7 @@ function App () {
           <Route exact path='/tests/theme/:themeName' component={Tests} />
           <Route exact path='/tests/theme/' render={() => <Redirect to='/tests' />} />
           <Route exact path='/tests/:testId' component={Questions} />
-          <Route exact path='/results/:id' component={Results} />
+          <Route exact path='/results' component={Results} />
           {/* <Route exact path='/tests/:theme' component={Q} /> */}
         </Switch>
         <Navbar />
