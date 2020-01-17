@@ -8,17 +8,17 @@ import Themes from './pages/Themes'
 import Tests from './pages/Tests'
 import Questions from './pages/Questions'
 import AddTest from './pages/AddTest'
+import Results from './pages/Results'
 import './App.css'
-import Profile from "./components/Profile";
 import {
   BrowserRouter as Router, Switch, Route, Redirect
 } from 'react-router-dom'
-import history from "./utils/history";
+import history from './utils/history'
 
-function App() {
+function App () {
   return (
-    <div className="App">
-     <Router history={history}>
+    <div className='App'>
+      <Router history={history}>
         <Switch>
           <Route exact path='/' component={Main} />
           <Route exact path='/themes' component={Themes} />
@@ -29,16 +29,14 @@ function App() {
           <Route exact path='/tests/theme/:themeName' component={Tests} />
           <Route exact path='/tests/theme/' render={() => <Redirect to='/tests' />} />
           <Route exact path='/tests/:testId' component={Questions} />
-          <Route path="/profile" component={Profile} />
+          <Route exact path='/results/:id' component={Results} />
           {/* <Route exact path='/tests/:theme' component={Q} /> */}
         </Switch>
         <Navbar />
       </Router>
-      
-     
-     
+
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

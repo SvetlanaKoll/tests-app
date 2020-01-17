@@ -1,14 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Fade from 'react-reveal/Fade';
 import style from './index.module.css'
 import { Link } from 'react-router-dom'
 import SubNavbarThemes from '../SubNavbarThemes'
 import { useAuth0 } from '../../react-auth0-spa'
 import Profile from '../Profile'
-import history from "../../utils/history";
+
 
 export default function Navbar() {
-  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0()
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0()
+  const [isShown, setIsShown] = useState(false)
+  const dropDownRef = useRef(null)
+
+  useEffect(() => {
+    if (dropDownRef.current) {
+      document.body.addEventListener('click', e => {
+        if (e.target !== dropDownRef.current) {
+          setIsShown(false)
+        }
+      })
+    }
+  }, [dropDownRef])
 
   const logoutWithRedirect = () =>
     logout({
@@ -30,10 +42,24 @@ export default function Navbar() {
       </Link>
        
         
-        <div className={style.nav__li}>
-          <Link className={style.nav__li__themes} to='/themes'>Themes of tests </Link>
-          <div className={style.nav__sub}>
-            <SubNavbarThemes/>     
+        <div 
+          className={style.nav__li}
+          onClick={() => {
+          if (isShown) {
+            setIsShown(false)
+          } else {
+            setIsShown(true)
+          }
+        }}>
+          Themes of tests
+          <div 
+            className={style.nav__sub}
+            ref={dropDownRef}
+          >
+          {isShown
+              ? <SubNavbarThemes/>
+              : null
+            }     
           </div>
         </div>
        
@@ -70,11 +96,11 @@ export default function Navbar() {
           )
           
         }
-       <Link to='/profile'>
+       <div className={style.nav__li}>
         {isAuthenticated
                   ? (
                    
-                    <div className={style.nav__li}><Profile /></div>
+                    <Profile />
                  
                   )
                   : (
@@ -82,7 +108,7 @@ export default function Navbar() {
                   )
                   
         }
-   </Link>
+   </div>
        
         </Fade>
       </div>
