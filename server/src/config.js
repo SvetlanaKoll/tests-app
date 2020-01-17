@@ -2,6 +2,7 @@ import { config } from 'dotenv'
 
 config()
 
+export const port = process.env.PORT || 3001
 export const jwksUri = process.env.JWKS_URI || ''
 export const audience = process.env.AUDIENCE || ''
 export const issuer = process.env.ISSUER || ''
