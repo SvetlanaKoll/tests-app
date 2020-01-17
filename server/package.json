@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel -d ./build ./src",
     "init:dev": "nodemon --exec babel-node src/index.js",
-    "init:prod": "yarn build && node build/index"
+    "init:prod": "npm run build && node build/index"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
