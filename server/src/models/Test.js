@@ -16,13 +16,20 @@ const TestSchema = new Schema({
     type: topicSchema,
     required: true
   },
-  options: [{
-    _id: {
-      type: Schema.Types.ObjectId,
-      index: true,
-      required: true,
-      auto: true
-    },
+  questions: [{
+    content: String,
+    options: [{
+      _id: {
+        type: Schema.Types.ObjectId,
+        index: true,
+        required: true,
+        auto: true
+      },
+      content: String
+    }]
+  }],
+  answers: [{
+    _id: Schema.Types.ObjectId,
     content: String,
     correct: Boolean
   }]

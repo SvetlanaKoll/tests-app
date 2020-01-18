@@ -2,15 +2,16 @@ import { Router } from 'express'
 import { checkJwt } from '../../utils'
 import jwtAuthz from 'express-jwt-authz'
 import Test from '../../models/Test'
+import Topic from '../../models/Topic'
 
 const router = new Router()
 
 // @route GET /api/test
 // @desc Get all tests
 router.get('/', checkJwt, jwtAuthz(['read:tests']), async (req, res) => {
-  console.log(req.user)
   try {
     const tests = await Test.find()
+
     res.json({
       sucess: true,
       tests
@@ -54,7 +55,12 @@ router.post('/new', checkJwt, jwtAuthz(['create:tests']), async (req, res) => {
   const newTest = new Test(req.body)
 
   try {
+    const topic = await Topic.findById(req.body.topicId)
+
+    console.log(topic)
+
     const test = await newTest.save()
+
     res.json({
       success: true,
       test
@@ -72,6 +78,7 @@ router.post('/new', checkJwt, jwtAuthz(['create:tests']), async (req, res) => {
 router.put('/update/:id', checkJwt, jwtAuthz(['update:tests']), async (req, res) => {
   try {
     const updatedTest = await Test.findByIdAndUpdate(req.params.id, req.body)
+
     res.json({
       success: true,
       updatedTest
@@ -87,20 +94,6 @@ router.put('/update/:id', checkJwt, jwtAuthz(['update:tests']), async (req, res)
 // @route DELETE /api/test/:id
 // @desc Delete test
 router.delete('/delete/:id', checkJwt, jwtAuthz(['delete:tests']), async (req, res) => {
-  try {
-    await Test.findOneAndRemove(req.params.id)
-    res.json({ success: true })
-  } catch (err) {
-    res.status(500).send({
-      success: false,
-      message: err
-    })
-  }
-})
-
-// @route POST /api/test/pass/:id/
-// @desc Pass test
-router.delete('/pass/:id', checkJwt, jwtAuthz(['create:answerlists']), async (req, res) => {
   try {
     await Test.findOneAndRemove(req.params.id)
     res.json({ success: true })

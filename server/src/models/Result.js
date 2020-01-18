@@ -7,7 +7,7 @@ const emailRe = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
 
 const validateEmail = re => email => re.test(email)
 
-const AnswersListSchema = new Schema({
+const ResultSchema = new Schema({
   test: {
     type: testSchema,
     required: true
@@ -20,12 +20,19 @@ const AnswersListSchema = new Schema({
     validate: [validateEmail(emailRe), 'Please provide a valid email address'],
     match: [emailRe, 'Please provide a valid email address']
   },
-  answers: [{
-    _id: Schema.ObjectId,
-    option: Number
+  options: [{
+    _id: {
+      type: Schema.Types.ObjectId,
+      index: true,
+      required: true,
+      auto: true
+    },
+    content: String,
+    correct: Boolean,
+    selected: Boolean
   }]
 })
 
-const AnswerList = model('answerList', AnswersListSchema)
+const Result = model('results', ResultSchema)
 
-export default AnswerList
+export default Result

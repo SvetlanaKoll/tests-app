@@ -1,19 +1,20 @@
 import { Router } from 'express'
 import { checkJwt } from '../../utils'
 import jwtAuthz from 'express-jwt-authz'
-import AnswerList from '../../models/AnswerList'
+import Result from '../../models/Result'
 import Test from '../../models/Test'
 
 const router = new Router()
 
 // @route GET /api/answerList
-// @desc Get all answerLists
-router.get('/', checkJwt, jwtAuthz(['read:answerLists']), async (req, res) => {
+// @desc Get all results
+router.get('/', checkJwt, jwtAuthz(['read:results']), async (req, res) => {
   try {
-    const answerLists = await AnswerList.find()
+    const results = await Result.find()
+
     res.json({
       success: true,
-      answerLists
+      results
     })
   } catch (err) {
     res.status(500).send({
@@ -25,9 +26,9 @@ router.get('/', checkJwt, jwtAuthz(['read:answerLists']), async (req, res) => {
 
 // @route GET /api/answerList/:id
 // @desc Get specific answerList
-router.get('/:id', checkJwt, jwtAuthz(['read:answerLists']), async (req, res) => {
+router.get('/:id', checkJwt, jwtAuthz(['read:results']), async (req, res) => {
   try {
-    const answerList = await AnswerList.findById(req.params.id)
+    const answerList = await Result.findById(req.params.id)
     res.json({
       success: true,
       answerList
@@ -42,34 +43,34 @@ router.get('/:id', checkJwt, jwtAuthz(['read:answerLists']), async (req, res) =>
 
 // @route POST /api/answerList/new
 // @desc Create new answerList
-router.post('/new', checkJwt, jwtAuthz(['create:answerLists']), async (req, res) => {
+router.post('/new', checkJwt, jwtAuthz(['create:results']), async (req, res) => {
   console.log(req.body)
   if (!req.body.questionerId) {
     return res.status(400).send({
       success: false,
-      message: 'Questioner ID is required!'
+      message: 'Test ID is required!'
     })
   }
 
-  const questioner = await Questioner.findById(req.body.questionerId)
+  const test = await Test.findById(req.body.questionerId)
 
-  if (!questioner) {
+  if (!test) {
     return res.status(400).send({
       success: false,
-      message: 'No such questioner found!'
+      message: 'No such test found!'
     })
   }
 
-  if (questioner.questions.length !== req.body.answers.length) {
+  if (test.questions.length !== req.body.answers.length) {
     return res.status(400).send({
       success: false,
       message: 'The amount of answers is not correct!'
     })
   }
 
-  const newAnswerList = new AnswerList({
+  const newAnswerList = new Result({
     ...req.body,
-    questioner
+    test
   })
 
   try {
@@ -88,9 +89,9 @@ router.post('/new', checkJwt, jwtAuthz(['create:answerLists']), async (req, res)
 
 // @route DELETE /api/answerList/:id
 // @desc Delete answerList
-router.delete('/delete/:id', checkJwt, jwtAuthz(['delete:answerLists']), async (req, res) => {
+router.delete('/delete/:id', checkJwt, jwtAuthz(['delete:results']), async (req, res) => {
   try {
-    await AnswerList.findOneAndRemove(req.params.id)
+    await Result.findOneAndRemove(req.params.id)
     res.json({ success: true })
   } catch (err) {
     res.status(500).send({
