@@ -5,20 +5,20 @@ import ThemeItem from '../../components/ThemeItem'
 import FirstBlock from '../../components/FirstBlock'
 import Search from '../../components/Search'
 import lamp from '../../static/lamp.webp'
-function Themes () {
-  const [themes, setThemes] = useState([])
+function Topics () {
+  const [topics, setThemes] = useState([])
   const [themesToDisplay, setThemesToDisplay] = useState([])
 
-  const filterThemes = searchString => setThemesToDisplay(searchString ? themes.filter(theme => theme.title.includes(searchString) || theme.description.includes(searchString)) : themes)
+  const filterThemes = searchString => setThemesToDisplay(searchString ? topics.filter(theme => theme.title.includes(searchString) || theme.description.includes(searchString)) : topics)
   return (
     <div className={style.container}>
-      <FirstBlock image={lamp} title='Themes of Tests' color='#fff'/>
+      <FirstBlock image={lamp} title='Topics' color='#fff'/>
       <Search onChange={filterThemes}/>
-      <div className={style.themes}>
+      <div className={style.topics}>
         {/* smth to render. map( item => ...) */}
         <ThemeItem name='English'/>
       </div>
     </div>
   )
 }
-export default withRouter(Themes)
+export default withRouter(Topics)

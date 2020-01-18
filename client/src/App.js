@@ -4,7 +4,7 @@ import Main from './pages/Main'
 import About from './pages/About'
 import Navbar from './components/Navbar'
 import Statistics from './pages/Statistics'
-import Themes from './pages/Themes'
+import Topics from './pages/Topics'
 import Tests from './pages/Tests'
 import Questions from './pages/Questions'
 import AddTest from './pages/AddTest'
@@ -21,7 +21,7 @@ function App () {
       <Router history={history}>
         <Switch>
           <Route exact path='/' component={Main} />
-          <Route exact path='/themes' component={Themes} />
+          <Route exact path='/themes' component={Topics} />
           <Route exact path='/statistics' component={Statistics} />
           <Route exact path='/about' component={About} />
           <Route exact path='/add' component={AddTest} />

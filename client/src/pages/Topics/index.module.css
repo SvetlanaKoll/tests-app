@@ -8,7 +8,7 @@
   background-color: cadetblue;
   font-family: 'Raleway', sans-serif;
 }
-.themes{
+.topics{
   width: 60vw;
   display: grid;
   grid-template-columns: 1fr;
@@ -16,12 +16,12 @@
   grid-row-gap: 1rem;
 }
 @media screen and (max-width: 890px) {
-  .themes{
+  .topics{
    width: 70vw;
   }
 }
 @media screen and (max-width: 530px) {
-  .themes{
+  .topics{
    width: 80vw;
   }
 }

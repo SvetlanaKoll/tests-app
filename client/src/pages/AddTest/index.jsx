@@ -5,53 +5,135 @@ import FirstBlock from '../../components/FirstBlock'
 import QuestionAdd from '../../components/QuestionAdd'
 import { withRouter } from 'react-router-dom'
 import uuid from 'uuid/v1'
+import doFetch from '../../utils/doFetch'
+import { useAuth0 } from '../../react-auth0-spa'
 
-function AddTest () {
+function AddTest ({ history }) {
   const [questions, setQuestions] = useState([])
-  const [selectedTheme, setSelectedTheme] = useState(null)
-  const [themes, setThemes] = useState([])
+  const [selectedTopic, setSelectedTopic] = useState(null)
+  const [topics, setTopics] = useState([])
   const [testTitle, setTestTitle] = useState('')
-  // useEffect(() => {
-  //   setQuestions([{}, {}, {}])
-  // }, [])
+  const [newTopicTitle, setNewTopicTitle] = useState('')
+  const [newTopicDescription, setNewTopicDescription] = useState('')
+  const { token } = useAuth0()
 
   useEffect(() => {
-    setThemes([...themes, { id: uuid(), title: 'English' }, { id: uuid(), title: 'Physics' }])
-  }, [])
+    console.log(selectedTopic)
+  }, [selectedTopic])
+
+  useEffect(() => {
+    (async () => {
+      if (token) {
+        try {
+          const data = await doFetch(token, 'GET', 'topics')
+
+          console.log(data)
+
+          if (data.success) {
+            console.log(data.topics)
+            setTopics(data.topics)
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    })()
+  }, [token])
 
   useEffect(() => {
     console.log(questions)
   }, [questions])
+
+  const createNewTopic = async () => {
+    try {
+      const result = await doFetch(token, 'POST', 'topics/new', {
+        title: newTopicTitle,
+        description: newTopicDescription
+      })
+
+      if (result.success) {
+        console.log(result.topic)
+        setTopics([...topics, result.topic])
+        setNewTopicDescription('')
+        setNewTopicTitle('')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const addTest = async () => {
+    if (token) {
+      if (window.confirm('Are you ready to add test?')) {
+        try {
+          const result = await doFetch(token, 'POST', 'tests/new', {
+            title: testTitle,
+            topicId: selectedTopic,
+            questions
+          })
+
+          if (result.success) {
+            history.push(`/tests/${result.test._id}`)
+          } else {
+            alert('An error did happen!')
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+  }
   return (
     <div className={style.container}>
 
       <FirstBlock image={sea} title='Add Your Test' color='rgb(66, 72, 74)'/>
-      <div className={style.box}>
+      <div
+
+        className={style.box}
+      >
 
         <div className='md-form input-group'>
-          <input type='text' className='form-control' placeholder='Your new theme' aria-label="Recipient's username with two button addons"
-            aria-describedby='MaterialButton-addon4'></input>
+          <input
+            type='text'
+            className='form-control'
+            placeholder='Your new topic'
+            aria-label="Recipient's username with two button addons"
+            aria-describedby='MaterialButton-addon4'
+            value={newTopicTitle}
+            onChange={(e) => setNewTopicTitle(e.target.value)}
+          />
+        </div>
+        <div className='md-form input-group'>
+          <input
+            type='text'
+            className='form-control'
+            placeholder='Description of your topic'
+            aria-label="Recipient's username with two button addons"
+            aria-describedby='MaterialButton-addon4'
+            value={newTopicDescription}
+            onChange={(e) => setNewTopicDescription(e.target.value)}
+          />
           <div className='input-group-append' id='MaterialButton-addon4'>
             <button
               className='btn btn-md btn-primary m-0 px-3'
               type='button'
+              onClick={createNewTopic}
             >
-              Add theme
+              Add topic
             </button>
           </div>
         </div>
 
         <select
           className='browser-default custom-select'
-          onChange={e => setSelectedTheme(e.target.value)}
+          onChange={e => setSelectedTopic(e.target.value)}
         >
-          <option defaultSelected value='0'>Choose your theme</option>
-          {themes.map(theme => (
+          <option defaultSelected value='0'>Choose your topic</option>
+          {topics.map(topic => (
             <option
-              value={theme.id}
-              key={theme.id}
+              value={topic._id}
+              key={topic._id}
             >
-              {theme.title}
+              {topic.title}
             </option>
           ))}
         </select>
@@ -83,7 +165,13 @@ function AddTest () {
           >
           + question
           </button>
-          <button className='btn btn-md btn-secondary m-0 px-3' type='button'>Add test</button>
+          <button
+            className='btn btn-md btn-secondary m-0 px-3'
+            type='button'
+            onClick={addTest}
+          >
+            Add test
+          </button>
         </div>
 
       </div>
