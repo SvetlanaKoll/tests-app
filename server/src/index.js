@@ -1,11 +1,11 @@
-import express from 'express'
-import path from 'path'
-import { port } from './config'
+import app from './app'
+import { mongoURI, port } from './config'
+import { connect } from 'mongoose'
 
-const app = express()
-
-app.use(express.static(path.join(__dirname, '../../client/build')))
-
-app.use('*', (_, res) => res.sendFile(path.join(__dirname, '../../client/build/index.html')))
-
-app.listen(port, () => { console.log(`App is ready on port ${port}`) })
+connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    app.listen(port, () => console.log('App is ready on 3001'))
+  })
+  .catch(err => {
+    console.log(err)
+  })
