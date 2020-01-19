@@ -12,9 +12,15 @@ router.get('/', checkJwt, jwtAuthz(['read:tests']), async (req, res) => {
   try {
     const tests = await Test.find()
 
+    const filteredTests = tests.map(({ _id, title, questions }) => ({
+      _id,
+      title,
+      questions: questions.withNoAnswers
+    }))
+
     res.json({
       success: true,
-      tests
+      tests: filteredTests
     })
   } catch (err) {
     res.status(500).send({
