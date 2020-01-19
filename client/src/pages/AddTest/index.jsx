@@ -15,6 +15,7 @@ function AddTest ({ history }) {
   const [testTitle, setTestTitle] = useState('')
   const [newTopicTitle, setNewTopicTitle] = useState('')
   const [newTopicDescription, setNewTopicDescription] = useState('')
+  const [timeLimit, setTimeLimit] = useState(20)
   const { token } = useAuth0()
 
   // useEffect(() => {
@@ -64,6 +65,7 @@ function AddTest ({ history }) {
           const result = await doFetch(token, 'POST', 'tests/new', {
             title: testTitle,
             topicId: selectedTopic,
+            timeLimit,
             questions
           })
 
@@ -149,6 +151,17 @@ function AddTest ({ history }) {
             {/* <button class="btn btn-md btn-primary m-0 px-3" type="button">Add name</button> */}
           </div>
         </div>
+        <div className='def-number-input number-input safari_only'>
+          <input
+            type='number'
+            min='5'
+            step='5'
+            defaultValue='20'
+            value={timeLimit}
+            onChange={(e) => setTimeLimit(parseInt(e.target.value))}
+          />
+        </div>
+
         {questions.map(({ id, content, options }) => (
           <QuestionAdd id={id} key={id} content={content} options={options} questions={questions} setQuestions={setQuestions} />))
         }

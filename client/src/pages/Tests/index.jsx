@@ -42,8 +42,8 @@ function Tests ({ match }) {
       </Flip></div>
       <Search onChange={filterTests}/>
       <div className={style.themes}>
-        {testsToDisplay.map(({ _id, title }) => (
-          <TestsOfThemeItem key={_id} name={title}/>
+        {testsToDisplay.map(({ _id, title, questions }) => (
+          <TestsOfThemeItem key={_id} _id={_id} title={title} length={questions.length}/>
         ))}
 
       </div>
