@@ -65,7 +65,7 @@ router.post('/new', checkJwt, jwtAuthz(['create:tests']), async (req, res) => {
       })
     }
 
-    const { questions, title } = req.body
+    const { questions, title, timeLimit } = req.body
 
     const answers = questions.map(({ options, id }) => ({
       itemId: id,
@@ -81,6 +81,7 @@ router.post('/new', checkJwt, jwtAuthz(['create:tests']), async (req, res) => {
     const newTest = new Test({
       title,
       topic,
+      timeLimit: timeLimit * 1000,
       questions: {
         withNoAnswers: questionsWithNoAnswers,
         answers

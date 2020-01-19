@@ -12,6 +12,7 @@ const TestSchema = new Schema({
     type: topicSchema,
     required: true
   },
+  timeLimit: Number,
   questions: {
     withNoAnswers: [{
       itemId: String,
