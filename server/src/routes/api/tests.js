@@ -39,7 +39,10 @@ router.get('/:id', checkJwt, jwtAuthz(['read:tests']), async (req, res) => {
 
     res.json({
       success: true,
-      test
+      test: {
+        ...test,
+        questions: test.questions.withNoAnswers
+      }
     })
   } catch (err) {
     res.status(500).send({
