@@ -12,7 +12,7 @@ router.get('/', checkJwt, async (req, res) => {
     const topics = await Topic.find()
 
     res.json({
-      sucess: true,
+      success: true,
       topics
     })
   } catch (err) {
@@ -32,7 +32,7 @@ router.post('/new', checkJwt, async (req, res) => {
     const topic = await newTopic.save()
 
     res.json({
-      sucess: true,
+      success: true,
       topic
     })
   } catch (err) {

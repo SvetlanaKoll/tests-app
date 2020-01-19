@@ -17,9 +17,9 @@ function AddTest ({ history }) {
   const [newTopicDescription, setNewTopicDescription] = useState('')
   const { token } = useAuth0()
 
-  useEffect(() => {
-    console.log(selectedTopic)
-  }, [selectedTopic])
+  // useEffect(() => {
+  //   console.log(selectedTopic)
+  // }, [selectedTopic])
 
   useEffect(() => {
     (async () => {
@@ -39,10 +39,6 @@ function AddTest ({ history }) {
       }
     })()
   }, [token])
-
-  useEffect(() => {
-    console.log(questions)
-  }, [questions])
 
   const createNewTopic = async () => {
     try {

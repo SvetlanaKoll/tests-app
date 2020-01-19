@@ -8,31 +8,27 @@ const TestSchema = new Schema({
     type: String,
     required: true
   },
-  description: {
-    type: String,
-    required: true
-  },
   topic: {
     type: topicSchema,
     required: true
   },
-  questions: [{
-    content: String,
-    options: [{
-      _id: {
-        type: Schema.Types.ObjectId,
-        index: true,
-        required: true,
-        auto: true
-      },
-      content: String
+  questions: {
+    withNoAnswers: [{
+      itemId: String,
+      content: String,
+      options: [{
+        optId: String,
+        content: String
+      }]
+    }],
+    answers: [{
+      itemId: String,
+      options: [{
+        optId: String,
+        isCorrect: Boolean
+      }]
     }]
-  }],
-  answers: [{
-    _id: Schema.Types.ObjectId,
-    content: String,
-    correct: Boolean
-  }]
+  }
 })
 
 const Test = model('tests', TestSchema)

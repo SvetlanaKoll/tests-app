@@ -21,7 +21,7 @@ const ResultSchema = new Schema({
     match: [emailRe, 'Please provide a valid email address']
   },
   options: [{
-    _id: {
+    id: {
       type: Schema.Types.ObjectId,
       index: true,
       required: true,

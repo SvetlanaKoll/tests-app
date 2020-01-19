@@ -13,7 +13,7 @@ router.get('/', checkJwt, jwtAuthz(['read:tests']), async (req, res) => {
     const tests = await Test.find()
 
     res.json({
-      sucess: true,
+      success: true,
       tests
     })
   } catch (err) {
@@ -52,12 +52,37 @@ router.get('/:id', checkJwt, jwtAuthz(['read:tests']), async (req, res) => {
 // @route POST /api/test/new
 // @desc Create new test
 router.post('/new', checkJwt, jwtAuthz(['create:tests']), async (req, res) => {
-  const newTest = new Test(req.body)
-
   try {
     const topic = await Topic.findById(req.body.topicId)
 
-    console.log(topic)
+    if (!topic) {
+      return res.status(400).send({
+        success: false,
+        message: 'No such topic found'
+      })
+    }
+
+    const { questions, title } = req.body
+
+    const answers = questions.map(({ options, id }) => ({
+      itemId: id,
+      options: options.map(({ isCorrect, id: optId }) => ({ isCorrect, optId }))
+    }))
+
+    const questionsWithNoAnswers = questions.map(({ options, id: itemId, content }) => ({
+      content,
+      itemId,
+      options: options.map(({ content, id: optId }) => ({ content, optId }))
+    }))
+
+    const newTest = new Test({
+      title,
+      topic,
+      questions: {
+        withNoAnswers: questionsWithNoAnswers,
+        answers
+      }
+    })
 
     const test = await newTest.save()
 
@@ -97,6 +122,47 @@ router.delete('/delete/:id', checkJwt, jwtAuthz(['delete:tests']), async (req, r
   try {
     await Test.findOneAndRemove(req.params.id)
     res.json({ success: true })
+  } catch (err) {
+    res.status(500).send({
+      success: false,
+      message: err
+    })
+  }
+})
+
+// @route POST /api/tests/pass/:id
+// @desc Update test
+router.post('/pass/:id', checkJwt, async (req, res) => {
+  try {
+    const testToPass = await Test.findById(req.params.id)
+
+    if (!testToPass) {
+      return res.status(400).send({
+        success: false,
+        message: 'No such test found'
+      })
+    }
+
+    const { selections } = req.body
+    const { answers } = testToPass.questions
+
+    // const pts = selections.reduce((selectAcc, currSelect) =>
+    //   selectAcc + currSelect.options.reduce((optAcc, currOpt) => optAcc +  (answers.find(({ itemId: answerId }) =>
+    //       answerId === currSelect.itemId).options.find(({ optId }) =>
+    //       optId === currOpt.optId))
+
+    //     // console.log(opt.isCorrect === currOpt.isChecked ? 1 : 0)
+
+    //     return optAcc + (opt.isCorrect === currOpt.isChecked ? 1 : 0)
+    //   }, 0)
+    // , 0)
+
+    // console.log(pts)
+
+    res.json({
+      success: true,
+      updatedTest
+    })
   } catch (err) {
     res.status(500).send({
       success: false,
