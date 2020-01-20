@@ -1,6 +1,6 @@
 .container{
   width: 100%;
-  height: 150vh;
+ padding-bottom: 20vh;
   display: flex;
   background-color: rgba(204, 229, 235,1);
   font-family: 'Raleway', sans-serif;
@@ -18,6 +18,17 @@
 }
 .btns__add{
   margin-top:1rem;
+}
+.inputTime{
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: rgb(95,97,116);
+}
+.inputTime__limit{
+  margin-right: 2rem;
 }
 @media screen and (max-width: 890px) {
   .box{

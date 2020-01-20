@@ -151,15 +151,18 @@ function AddTest ({ history }) {
             {/* <button class="btn btn-md btn-primary m-0 px-3" type="button">Add name</button> */}
           </div>
         </div>
-        <div className='def-number-input number-input safari_only'>
-          <input
-            type='number'
-            min='5'
-            step='5'
-            defaultValue='20'
-            value={timeLimit}
-            onChange={(e) => setTimeLimit(parseInt(e.target.value))}
-          />
+        <div className={style.inputTime}>
+        <div className={style.inputTime__limit}>Time Limit:</div>
+          <div className='def-number-input number-input safari_only'>
+            <input
+              type='number'
+              min='5'
+              step='5'
+              defaultValue='20'
+              value={timeLimit}
+              onChange={(e) => setTimeLimit(parseInt(e.target.value))}
+            />
+          </div>
         </div>
 
         {questions.map(({ id, content, options }) => (
