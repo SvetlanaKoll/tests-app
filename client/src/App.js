@@ -21,13 +21,13 @@ function App () {
       <Router history={history}>
         <Switch>
           <Route exact path='/' component={Main} />
-          <Route exact path='/themes' component={Topics} />
+          <Route exact path='/topics' component={Topics} />
           <Route exact path='/statistics' component={Statistics} />
           <Route exact path='/about' component={About} />
           <Route exact path='/add' component={AddTest} />
           <Route exact path='/tests' component={Tests} />
-          <Route exact path='/tests/theme/:themeName' component={Tests} />
-          <Route exact path='/tests/theme/' render={() => <Redirect to='/tests' />} />
+          <Route exact path='/tests/topic/:topicId' component={Tests} />
+          <Route exact path='/tests/topic/' render={() => <Redirect to='/tests' />} />
           <Route exact path='/tests/:testId' component={Questions} />
           <Route exact path='/results' component={Results} />
           {/* <Route exact path='/tests/:theme' component={Q} /> */}

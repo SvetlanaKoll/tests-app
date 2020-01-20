@@ -12,6 +12,7 @@ import Tests from '../Tests'
 function Questions ({ history, match }) {
   const [test, setTest] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+  const [userSelections, setUserSelections] = useState([])
 
   const { token } = useAuth0()
   useEffect(() => {
@@ -23,6 +24,7 @@ function Questions ({ history, match }) {
           if (result.success) {
             console.log(result.test)
             setTest(result.test)
+            setUserSelections(result.test.questions.map(({ itemId, options }) => ({ itemId, options: options.map(({ optId }) => ({ optId, isChecked: false })) })))
             setIsLoading(false)
           }
         } catch (error) {
@@ -31,6 +33,10 @@ function Questions ({ history, match }) {
       })()
     }
   }, [token])
+
+  useEffect(() => {
+    console.log(userSelections)
+  }, [userSelections])
 
   // const passTest = () => {
   //   console.log(123)
@@ -42,12 +48,24 @@ function Questions ({ history, match }) {
         history.push('/tests')
       } else {
         setTimeout(() => {
-          // passTest()
-          history.push('/tests')
+          sendTest()
         }, test.timeLimit)
       }
     }
   }, [test])
+
+  const sendTest = async () => {
+    if (token) {
+      const result = await doFetch(token, 'POST', `tests/pass/${match.params.testId}`, {
+        selections: userSelections
+      })
+
+      if (result.success) {
+        alert('You successfully passed the test!')
+        history.push(`/results/${result._id}`)
+      }
+    }
+  }
 
   if (isLoading) {
     return 'Loading...'
@@ -59,14 +77,24 @@ function Questions ({ history, match }) {
       <FirstBlock image={sea} title='Questions' color='rgb(66, 72, 74)'/>
       <Timer timeLimit={test.timeLimit}/>
       <div className={style.container__question}>
-        <QuestionsItem />
+        {test.questions.map(question => (
+          <QuestionsItem
+            key={question.itemId}
+            itemId={question.itemId}
+            options={question.options}
+            content={question.content}
+            userSelections={userSelections}
+            setUserSelections={setUserSelections}
+          />
+        ))}
+
       </div>
       <button
         className='btn btn-md btn-primary m-0 px-3'
         type='button'
-
+        onClick={() => sendTest()}
       >
-            Finish
+        Finish
       </button>
     </div>
   )
