@@ -17,11 +17,12 @@ Search (props) {
           placeholder='What do you look for?'
           aria-label='Username'
           aria-describedby='material-addon1'
-          onChange={e => props.onChange(e.target.value)}
+          onChange={props.onInputChange}
         />
         <select
           style={{ backgroundColor: 'transparent', color: 'slategray' }}
           className='browser-default custom-select'
+          onChange={props.onSelectChange}
         >
           <option selected>Sort by</option>
           <option value='1'>Quantity</option>

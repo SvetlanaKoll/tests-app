@@ -11,6 +11,7 @@ import Flip from 'react-reveal/Flip'
 function Tests ({ match }) {
   const [testsToDisplay, setTestsToDisplay] = useState([])
   const [tests, setTests] = useState([])
+  const [sortBy, setSortBy] = useState('0')
   const { token } = useAuth0()
 
   useEffect(() => {
@@ -33,6 +34,28 @@ function Tests ({ match }) {
     })()
   }, [token])
 
+  useEffect(() => {
+    switch (sortBy) {
+      case '0': {
+        setTestsToDisplay(tests)
+        break
+      }
+      case '1': {
+        setTestsToDisplay(tests.sort((a, b) => a.questions.length - b.questions.length))
+        break
+      }
+      // case '2': {
+      //   setTestsToDisplay(tests.sort((a,b) => a.questions.length - b.questions.length))
+      //   break
+      // }
+      case '3': {
+        console.log(tests[0].createdAt)
+        setTestsToDisplay(tests.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)))
+        break
+      }
+    }
+  }, [sortBy])
+
   const filterTests = searchString => setTestsToDisplay(searchString ? tests.filter(test => test.title.includes(searchString)) : tests)
 
   return (
@@ -40,7 +63,10 @@ function Tests ({ match }) {
       <div className={style.container__title}><Flip left >
         {match.params.themeName ? `Tests by theme '${match.params.themeName}'` : 'All tests'}
       </Flip></div>
-      <Search onChange={filterTests}/>
+      <Search
+        onChange={e => filterTests(e.target.value)}
+        onSelectChange={e => setSortBy(e.target.value)}
+      />
       <div className={style.themes}>
         {testsToDisplay.map(({ _id, title, questions }) => (
           <TestsOfThemeItem key={_id} _id={_id} title={title} length={questions.length}/>

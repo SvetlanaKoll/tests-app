@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function Checkbox (props) {
+  const isChecked = props.isChecked || undefined
+  const isCorrect = props.isChecked === props.isCorrect
+
+  console.log('ischecked', isChecked)
+
   return (
 
     <div className='custom-control custom-checkbox'>
@@ -9,9 +14,11 @@ export default function Checkbox (props) {
         className='custom-control-input'
         id={props.id}
         onChange={props.onChange}
+        disabled={props.doValidate}
+        checked={isChecked}
       />
       <label
-        // style={{ color: `${props.correctColor}` }}
+        style={{ color: props.doValidate ? isCorrect ? `${props.correctColor}` : `${props.falseColor}` : ''}}
         className='custom-control-label'
         htmlFor={props.id}
       >
