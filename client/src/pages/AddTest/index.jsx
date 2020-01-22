@@ -84,11 +84,7 @@ function AddTest ({ history }) {
     <div className={style.container}>
 
       <FirstBlock image={sea} title='Add Your Test' color='rgb(66, 72, 74)'/>
-      <div
-
-        className={style.box}
-      >
-
+      <div className={style.box}>
         <div className='md-form input-group'>
           <input
             type='text'
@@ -144,15 +140,12 @@ function AddTest ({ history }) {
             aria-describedby='MaterialButton-addon4'
             value={testTitle}
             onChange={e => setTestTitle(e.target.value)}
-          >
-
-          </input>
+          />
           <div className='input-group-append' id='MaterialButton-addon4'>
-            {/* <button class="btn btn-md btn-primary m-0 px-3" type="button">Add name</button> */}
           </div>
         </div>
         <div className={style.inputTime}>
-        <div className={style.inputTime__limit}>Time Limit:</div>
+          <div className={style.inputTime__limit}>Time Limit:</div>
           <div className='def-number-input number-input safari_only'>
             <input
               type='number'

@@ -7,8 +7,10 @@ Search (props) {
     <div className={style.container}>
       <div className='md-form input-group mb-3'>
         <div className='input-group-prepend'>
+
           <span className='input-group-text md-addon' id='material-addon1'><img className={style.search} src={search} alt='search'/></span>
         </div>
+
         <input
           type='text'
           className='form-control'
@@ -17,7 +19,15 @@ Search (props) {
           aria-describedby='material-addon1'
           onChange={e => props.onChange(e.target.value)}
         />
-
+        <select
+          style={{ backgroundColor: 'transparent', color: 'slategray' }}
+          className='browser-default custom-select'
+        >
+          <option selected>Sort by</option>
+          <option value='1'>Quantity</option>
+          <option value='2'>Popular</option>
+          <option value='3'>Newest</option>
+        </select>
       </div>
     </div>
   )

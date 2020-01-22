@@ -9,6 +9,7 @@ import Results from '../Results'
 import { useAuth0 } from '../../react-auth0-spa'
 import doFetch from '../../utils/doFetch'
 import Tests from '../Tests'
+import Spinner from '../../components/Spinner'
 function Questions ({ history, match }) {
   const [test, setTest] = useState({})
   const [isLoading, setIsLoading] = useState(true)
@@ -68,7 +69,7 @@ function Questions ({ history, match }) {
   }
 
   if (isLoading) {
-    return 'Loading...'
+    return <Spinner />
   }
 
   return (
