@@ -14,6 +14,7 @@ import {
   BrowserRouter as Router, Switch, Route, Redirect
 } from 'react-router-dom'
 import history from './utils/history'
+import PrivateRoute from './components/PrivateRoute'
 
 function App () {
   return (
@@ -24,12 +25,17 @@ function App () {
           <Route exact path='/topics' component={Topics} />
           <Route exact path='/statistics' component={Statistics} />
           <Route exact path='/about' component={About} />
-          <Route exact path='/add' component={AddTest} />
+          <PrivateRoute
+            exact
+            path='/add'
+            render={() => <AddTest />}
+            requiredScope={['create:tests']}
+          />
           <Route exact path='/tests' component={Tests} />
           <Route exact path='/tests/topic/:topicId' component={Tests} />
           <Route exact path='/tests/topic/' render={() => <Redirect to='/tests' />} />
           <Route exact path='/tests/:testId' component={Questions} />
-          <Route exact path='/results' component={Results} />
+          <Route exact path='/results/:resultId' component={Results} />
           {/* <Route exact path='/tests/:theme' component={Q} /> */}
         </Switch>
         <Navbar />

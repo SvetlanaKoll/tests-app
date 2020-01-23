@@ -18,10 +18,6 @@ function AddTest ({ history }) {
   const [timeLimit, setTimeLimit] = useState(20)
   const { token } = useAuth0()
 
-  // useEffect(() => {
-  //   console.log(selectedTopic)
-  // }, [selectedTopic])
-
   useEffect(() => {
     (async () => {
       if (token) {
@@ -49,7 +45,6 @@ function AddTest ({ history }) {
       })
 
       if (result.success) {
-        console.log(result.topic)
         setTopics([...topics, result.topic])
         setNewTopicDescription('')
         setNewTopicTitle('')

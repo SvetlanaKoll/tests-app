@@ -10,6 +10,7 @@ import { useAuth0 } from '../../react-auth0-spa'
 import doFetch from '../../utils/doFetch'
 import Tests from '../Tests'
 import Spinner from '../../components/Spinner'
+
 function Questions ({ history, match }) {
   const [test, setTest] = useState({})
   const [isLoading, setIsLoading] = useState(true)
@@ -23,7 +24,6 @@ function Questions ({ history, match }) {
           const result = await doFetch(token, 'GET', `tests/${match.params.testId}`)
 
           if (result.success) {
-            console.log(result.test)
             setTest(result.test)
             setUserSelections(result.test.questions.map(({ itemId, options }) => ({ itemId, options: options.map(({ optId }) => ({ optId, isChecked: false })) })))
             setIsLoading(false)
@@ -34,14 +34,6 @@ function Questions ({ history, match }) {
       })()
     }
   }, [token])
-
-  useEffect(() => {
-    console.log(userSelections)
-  }, [userSelections])
-
-  // const passTest = () => {
-  //   console.log(123)
-  // }
 
   useEffect(() => {
     if (test.timeLimit) {
@@ -63,7 +55,7 @@ function Questions ({ history, match }) {
 
       if (result.success) {
         alert('You successfully passed the test!')
-        history.push(`/results/${result._id}`)
+        history.push(`/results/${result.result._id}`)
       }
     }
   }

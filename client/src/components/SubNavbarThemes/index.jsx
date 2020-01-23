@@ -4,8 +4,9 @@ import style from './index.module.css'
 import { Link } from 'react-router-dom'
 import { useAuth0 } from '../../react-auth0-spa'
 import doFetch from '../../utils/doFetch'
+import { withRouter } from 'react-router-dom'
 
-export default function SubNavbarThemes () {
+function SubNavbarThemes () {
   const { token } = useAuth0()
   const [topics, setTopics] = useState([])
 
@@ -34,7 +35,7 @@ export default function SubNavbarThemes () {
             {topics.map(topic => (
               <Link
                 key={topic.id}
-                to={`/tests/topic/:${topic._id}`}
+                to={`/tests/topic/${topic._id}`}
               >
                 <li className={style.container__li}>
                   {topic.title}
@@ -48,3 +49,6 @@ export default function SubNavbarThemes () {
     </div>
   )
 }
+
+
+export default withRouter(SubNavbarThemes)

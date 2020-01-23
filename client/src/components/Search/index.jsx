@@ -2,6 +2,7 @@ import React from 'react'
 import style from './index.module.css'
 import search from '../../static/search.svg'
 export default function
+
 Search (props) {
   return (
     <div className={style.container}>
@@ -17,12 +18,12 @@ Search (props) {
           placeholder='What do you look for?'
           aria-label='Username'
           aria-describedby='material-addon1'
-          onChange={props.onInputChange}
+          onChange={e => props.onInputChange(e)}
         />
         <select
           style={{ backgroundColor: 'transparent', color: 'slategray' }}
           className='browser-default custom-select'
-          onChange={props.onSelectChange}
+          onChange={e => props.onSelectChange(e)}
         >
           <option selected>Sort by</option>
           <option value='1'>Quantity</option>
