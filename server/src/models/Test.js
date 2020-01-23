@@ -13,6 +13,7 @@ const TestSchema = new Schema({
     required: true
   },
   timeLimit: Number,
+  numberOfOptions: Number,
   questions: {
     withNoAnswers: [{
       itemId: String,
@@ -29,6 +30,15 @@ const TestSchema = new Schema({
         isCorrect: Boolean
       }]
     }]
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    auto: true
+  },
+  timesPassed: {
+    type: Number,
+    default: 0
   }
 })
 

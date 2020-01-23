@@ -3,6 +3,8 @@ import { checkJwt } from '../../utils'
 import jwtAuthz from 'express-jwt-authz'
 import Test from '../../models/Test'
 import Topic from '../../models/Topic'
+import Result from '../../models/Result'
+import { audience } from '../../config'
 
 const router = new Router()
 
@@ -12,11 +14,9 @@ router.get('/', checkJwt, jwtAuthz(['read:tests']), async (req, res) => {
   try {
     const tests = await Test.find()
 
-    const filteredTests = tests.map(({ _id, title, questions, timeLimit }) => ({
-      _id,
-      title,
-      timeLimit,
-      questions: questions.withNoAnswers
+    const filteredTests = tests.map(test => ({
+      ...test._doc,
+      questions: test.questions.withNoAnswers
     }))
 
     res.json({
@@ -47,9 +47,7 @@ router.get('/:id', checkJwt, jwtAuthz(['read:tests']), async (req, res) => {
     res.json({
       success: true,
       test: {
-        title: test.title,
-        topic: test.topic,
-        timeLimit: test.timeLimit,
+        ...test._doc,
         questions: test.questions.withNoAnswers
       }
     })
@@ -87,14 +85,18 @@ router.post('/new', checkJwt, jwtAuthz(['create:tests']), async (req, res) => {
       options: options.map(({ content, id: optId }) => ({ content, optId }))
     }))
 
+    const numberOfOptions = questions.reduce((acc, curr) => acc + curr.options.length, 0)
+
     const newTest = new Test({
       title,
       topic,
-      timeLimit: timeLimit * 1000,
+      timeLimit: timeLimit * 60000,
+      numberOfOptions,
       questions: {
         withNoAnswers: questionsWithNoAnswers,
         answers
-      }
+      },
+      timesPassed: 0
     })
 
     const test = await newTest.save()
@@ -157,24 +159,44 @@ router.post('/pass/:id', checkJwt, async (req, res) => {
     }
 
     const { selections } = req.body
-    const { answers } = testToPass.questions
+    const { answers, withNoAnswers } = testToPass.questions
 
-    // const pts = selections.reduce((selectAcc, currSelect) =>
-    //   selectAcc + currSelect.options.reduce((optAcc, currOpt) => optAcc +  (answers.find(({ itemId: answerId }) =>
-    //       answerId === currSelect.itemId).options.find(({ optId }) =>
-    //       optId === currOpt.optId))
+    const pts = selections.reduce((selectAcc, currSelect) =>
+      selectAcc + currSelect.options.reduce((optAcc, currOpt) =>
+        optAcc + ((answers.find(({ itemId: answerId }) =>
+          answerId === currSelect.itemId).options.find(({ optId }) =>
+          optId === currOpt.optId)).isCorrect === currOpt.isChecked ? 1 : 0),
+      0),
+    0)
 
-    //     // console.log(opt.isCorrect === currOpt.isChecked ? 1 : 0)
+    const validatedSelections = selections.map((selection, itemIndex) => ({
+      ...selection,
+      content: withNoAnswers[itemIndex].content,
+      options: selection.options.map((option, optionIndex) => ({
+        ...option,
+        content: withNoAnswers[itemIndex].options[optionIndex].content,
+        isCorrect: answers[itemIndex].options[optionIndex].isCorrect
+      }))
+    }))
 
-    //     return optAcc + (opt.isCorrect === currOpt.isChecked ? 1 : 0)
-    //   }, 0)
-    // , 0)
+    // console.log(JSON.stringify(validatedSelections, null, 2))
 
-    // console.log(pts)
+    const responderEmail = req.user[`${audience}email`]
+
+    const newResult = new Result({
+      test: testToPass,
+      responderEmail,
+      validatedSelections,
+      pts
+    })
+
+    const result = await newResult.save()
+
+    await Test.findByIdAndUpdate(testToPass._id, { timesPassed: testToPass.timesPassed + 1 })
 
     res.json({
       success: true,
-      updatedTest
+      result
     })
   } catch (err) {
     res.status(500).send({

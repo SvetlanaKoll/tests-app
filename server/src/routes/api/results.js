@@ -26,12 +26,22 @@ router.get('/', checkJwt, jwtAuthz(['read:results']), async (req, res) => {
 
 // @route GET /api/answerList/:id
 // @desc Get specific answerList
-router.get('/:id', checkJwt, jwtAuthz(['read:results']), async (req, res) => {
+router.get('/:id', checkJwt, async (req, res) => {
   try {
-    const answerList = await Result.findById(req.params.id)
+    const result = await Result.findById(req.params.id)
+
+    console.log(result)
+
+    if (!result) {
+      res.status(400).send({
+        success: false,
+        message: 'No such test found'
+      })
+    }
+
     res.json({
       success: true,
-      answerList
+      result
     })
   } catch (err) {
     res.status(500).send({

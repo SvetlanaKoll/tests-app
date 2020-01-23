@@ -12,6 +12,10 @@ const ResultSchema = new Schema({
     type: testSchema,
     required: true
   },
+  pts: {
+    type: Number,
+    required: true
+  },
   responderEmail: {
     type: String,
     trim: true,
@@ -20,17 +24,20 @@ const ResultSchema = new Schema({
     validate: [validateEmail(emailRe), 'Please provide a valid email address'],
     match: [emailRe, 'Please provide a valid email address']
   },
-  options: [{
-    id: {
-      type: Schema.Types.ObjectId,
-      index: true,
-      required: true,
-      auto: true
-    },
+  validatedSelections: [{
+    itemId: String,
     content: String,
-    correct: Boolean,
-    selected: Boolean
-  }]
+    options: [{
+      optId: String,
+      content: String,
+      isCorrect: Boolean,
+      isChecked: Boolean
+    }]
+  }],
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
 })
 
 const Result = model('results', ResultSchema)
